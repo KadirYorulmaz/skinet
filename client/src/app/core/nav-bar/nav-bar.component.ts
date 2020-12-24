@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { faCoffee, faShoppingCart, faShoppingBasket, faShoppingBag } from '@fortawesome/free-solid-svg-icons';
+import { Observable } from 'rxjs';
+import { BasketService } from 'src/app/basket/basket.service';
+import { IBasket } from 'src/app/shared/models/basket';
 
 @Component({
   selector: 'app-nav-bar',
@@ -11,9 +14,13 @@ export class NavBarComponent implements OnInit {
   faShoppingBasket = faShoppingBasket;
   faShoppingBag = faShoppingBag;
 
-  constructor() { }
+  basket$: Observable<IBasket>;
 
-  ngOnInit(): void {
+  constructor(private basketService: BasketService) { }
+
+  ngOnInit() {
+    this.basket$ = this.basketService.basket$;
+    console.log(this.basketService.basket$);
   }
 
 }
